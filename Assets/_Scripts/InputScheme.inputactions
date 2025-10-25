@@ -3,11 +3,11 @@
     "name": "InputScheme",
     "maps": [
         {
-            "name": "PlayerMovement",
+            "name": "Player1Movement",
             "id": "e1b67693-095b-44a5-8ff8-fb592d926415",
             "actions": [
                 {
-                    "name": "team1Movement",
+                    "name": "teamMovement",
                     "type": "Value",
                     "id": "a1001fe8-1bde-4fc3-a482-7ec01400d6e2",
                     "expectedControlType": "Vector2",
@@ -16,13 +16,22 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "team2Movement",
-                    "type": "Value",
-                    "id": "7bade08c-ccde-4c55-bc18-14db147e3fa7",
-                    "expectedControlType": "Vector2",
+                    "name": "SelectPreviousFinger",
+                    "type": "Button",
+                    "id": "2404969c-c171-4406-8044-219e47a470db",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectNextFinger",
+                    "type": "Button",
+                    "id": "11f0d13f-0213-4345-8929-9befbb70ac6e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -33,7 +42,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "team1Movement",
+                    "action": "teamMovement",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -44,7 +53,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "team1Movement",
+                    "action": "teamMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -55,7 +64,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "team1Movement",
+                    "action": "teamMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -66,7 +75,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "team1Movement",
+                    "action": "teamMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -77,64 +86,143 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "team1Movement",
+                    "action": "teamMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "",
+                    "id": "4a0a2c51-0576-4ecf-b5da-f1bf748e5fe3",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectPreviousFinger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e9ff092a-2c67-4d04-a3d7-6dec96a01964",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectNextFinger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Player2Movement",
+            "id": "78868ead-112a-48c2-9741-addfe600cca1",
+            "actions": [
+                {
+                    "name": "teamMovement",
+                    "type": "Value",
+                    "id": "d7855ea1-d888-455f-b95d-77bad8efe01c",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SelectPreviousFinger",
+                    "type": "Button",
+                    "id": "5581e424-119b-486b-ba5f-16175001dc23",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectNextFinger",
+                    "type": "Button",
+                    "id": "3804ecdb-fefa-4ec1-b9f1-fdb5c5b11052",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "446f791c-b52a-4360-ae7b-a4cd1534021e",
+                    "path": "<Keyboard>/9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectPreviousFinger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "2D Vector",
-                    "id": "53a15f52-f404-4cfe-989d-7388cfa86c9b",
+                    "id": "451535b7-b400-4baa-ab7e-2a3ab78c083e",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "team2Movement",
+                    "action": "teamMovement",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "up",
-                    "id": "ee3282e1-a2c2-4ff8-9ea8-6c6935329214",
+                    "id": "adeef421-ee11-439c-b795-20369ca1263b",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "team2Movement",
+                    "action": "teamMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "down",
-                    "id": "c0d6c896-ac8a-4039-91f9-2ed4f06672e5",
+                    "id": "adcd0fa8-5eb0-43b3-b18d-1be9ea7cc829",
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "team2Movement",
+                    "action": "teamMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
-                    "id": "e2617572-3d13-4c55-bf2c-e4348b4970b2",
+                    "id": "c4427525-9f1f-40c4-ab37-0e0f27f78fde",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "team2Movement",
+                    "action": "teamMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
-                    "id": "869f14c7-0c36-417e-b1c7-96148c64219f",
+                    "id": "53e6e3ff-d2f1-4a63-ba76-e29984654e34",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "team2Movement",
+                    "action": "teamMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "1a929126-d93c-44bf-8a12-c0ae00a0ead9",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectNextFinger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

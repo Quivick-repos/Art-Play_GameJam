@@ -89,11 +89,11 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
     ""name"": ""InputScheme"",
     ""maps"": [
         {
-            ""name"": ""PlayerMovement"",
+            ""name"": ""Player1Movement"",
             ""id"": ""e1b67693-095b-44a5-8ff8-fb592d926415"",
             ""actions"": [
                 {
-                    ""name"": ""team1Movement"",
+                    ""name"": ""teamMovement"",
                     ""type"": ""Value"",
                     ""id"": ""a1001fe8-1bde-4fc3-a482-7ec01400d6e2"",
                     ""expectedControlType"": ""Vector2"",
@@ -102,13 +102,22 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""team2Movement"",
-                    ""type"": ""Value"",
-                    ""id"": ""7bade08c-ccde-4c55-bc18-14db147e3fa7"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""SelectPreviousFinger"",
+                    ""type"": ""Button"",
+                    ""id"": ""2404969c-c171-4406-8044-219e47a470db"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectNextFinger"",
+                    ""type"": ""Button"",
+                    ""id"": ""11f0d13f-0213-4345-8929-9befbb70ac6e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -119,7 +128,7 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""team1Movement"",
+                    ""action"": ""teamMovement"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -130,7 +139,7 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""team1Movement"",
+                    ""action"": ""teamMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -141,7 +150,7 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""team1Movement"",
+                    ""action"": ""teamMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -152,7 +161,7 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""team1Movement"",
+                    ""action"": ""teamMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -163,64 +172,143 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""team1Movement"",
+                    ""action"": ""teamMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""4a0a2c51-0576-4ecf-b5da-f1bf748e5fe3"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectPreviousFinger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9ff092a-2c67-4d04-a3d7-6dec96a01964"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectNextFinger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Player2Movement"",
+            ""id"": ""78868ead-112a-48c2-9741-addfe600cca1"",
+            ""actions"": [
+                {
+                    ""name"": ""teamMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""d7855ea1-d888-455f-b95d-77bad8efe01c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SelectPreviousFinger"",
+                    ""type"": ""Button"",
+                    ""id"": ""5581e424-119b-486b-ba5f-16175001dc23"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectNextFinger"",
+                    ""type"": ""Button"",
+                    ""id"": ""3804ecdb-fefa-4ec1-b9f1-fdb5c5b11052"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""446f791c-b52a-4360-ae7b-a4cd1534021e"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectPreviousFinger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""2D Vector"",
-                    ""id"": ""53a15f52-f404-4cfe-989d-7388cfa86c9b"",
+                    ""id"": ""451535b7-b400-4baa-ab7e-2a3ab78c083e"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""team2Movement"",
+                    ""action"": ""teamMovement"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""ee3282e1-a2c2-4ff8-9ea8-6c6935329214"",
+                    ""id"": ""adeef421-ee11-439c-b795-20369ca1263b"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""team2Movement"",
+                    ""action"": ""teamMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""c0d6c896-ac8a-4039-91f9-2ed4f06672e5"",
+                    ""id"": ""adcd0fa8-5eb0-43b3-b18d-1be9ea7cc829"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""team2Movement"",
+                    ""action"": ""teamMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""e2617572-3d13-4c55-bf2c-e4348b4970b2"",
+                    ""id"": ""c4427525-9f1f-40c4-ab37-0e0f27f78fde"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""team2Movement"",
+                    ""action"": ""teamMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""869f14c7-0c36-417e-b1c7-96148c64219f"",
+                    ""id"": ""53e6e3ff-d2f1-4a63-ba76-e29984654e34"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""team2Movement"",
+                    ""action"": ""teamMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a929126-d93c-44bf-8a12-c0ae00a0ead9"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectNextFinger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -233,15 +321,22 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // PlayerMovement
-        m_PlayerMovement = asset.FindActionMap("PlayerMovement", throwIfNotFound: true);
-        m_PlayerMovement_team1Movement = m_PlayerMovement.FindAction("team1Movement", throwIfNotFound: true);
-        m_PlayerMovement_team2Movement = m_PlayerMovement.FindAction("team2Movement", throwIfNotFound: true);
+        // Player1Movement
+        m_Player1Movement = asset.FindActionMap("Player1Movement", throwIfNotFound: true);
+        m_Player1Movement_teamMovement = m_Player1Movement.FindAction("teamMovement", throwIfNotFound: true);
+        m_Player1Movement_SelectPreviousFinger = m_Player1Movement.FindAction("SelectPreviousFinger", throwIfNotFound: true);
+        m_Player1Movement_SelectNextFinger = m_Player1Movement.FindAction("SelectNextFinger", throwIfNotFound: true);
+        // Player2Movement
+        m_Player2Movement = asset.FindActionMap("Player2Movement", throwIfNotFound: true);
+        m_Player2Movement_teamMovement = m_Player2Movement.FindAction("teamMovement", throwIfNotFound: true);
+        m_Player2Movement_SelectPreviousFinger = m_Player2Movement.FindAction("SelectPreviousFinger", throwIfNotFound: true);
+        m_Player2Movement_SelectNextFinger = m_Player2Movement.FindAction("SelectNextFinger", throwIfNotFound: true);
     }
 
     ~@InputScheme()
     {
-        UnityEngine.Debug.Assert(!m_PlayerMovement.enabled, "This will cause a leak and performance issues, InputScheme.PlayerMovement.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Player1Movement.enabled, "This will cause a leak and performance issues, InputScheme.Player1Movement.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Player2Movement.enabled, "This will cause a leak and performance issues, InputScheme.Player2Movement.Disable() has not been called.");
     }
 
     /// <summary>
@@ -314,34 +409,39 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // PlayerMovement
-    private readonly InputActionMap m_PlayerMovement;
-    private List<IPlayerMovementActions> m_PlayerMovementActionsCallbackInterfaces = new List<IPlayerMovementActions>();
-    private readonly InputAction m_PlayerMovement_team1Movement;
-    private readonly InputAction m_PlayerMovement_team2Movement;
+    // Player1Movement
+    private readonly InputActionMap m_Player1Movement;
+    private List<IPlayer1MovementActions> m_Player1MovementActionsCallbackInterfaces = new List<IPlayer1MovementActions>();
+    private readonly InputAction m_Player1Movement_teamMovement;
+    private readonly InputAction m_Player1Movement_SelectPreviousFinger;
+    private readonly InputAction m_Player1Movement_SelectNextFinger;
     /// <summary>
-    /// Provides access to input actions defined in input action map "PlayerMovement".
+    /// Provides access to input actions defined in input action map "Player1Movement".
     /// </summary>
-    public struct PlayerMovementActions
+    public struct Player1MovementActions
     {
         private @InputScheme m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public PlayerMovementActions(@InputScheme wrapper) { m_Wrapper = wrapper; }
+        public Player1MovementActions(@InputScheme wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "PlayerMovement/team1Movement".
+        /// Provides access to the underlying input action "Player1Movement/teamMovement".
         /// </summary>
-        public InputAction @team1Movement => m_Wrapper.m_PlayerMovement_team1Movement;
+        public InputAction @teamMovement => m_Wrapper.m_Player1Movement_teamMovement;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerMovement/team2Movement".
+        /// Provides access to the underlying input action "Player1Movement/SelectPreviousFinger".
         /// </summary>
-        public InputAction @team2Movement => m_Wrapper.m_PlayerMovement_team2Movement;
+        public InputAction @SelectPreviousFinger => m_Wrapper.m_Player1Movement_SelectPreviousFinger;
+        /// <summary>
+        /// Provides access to the underlying input action "Player1Movement/SelectNextFinger".
+        /// </summary>
+        public InputAction @SelectNextFinger => m_Wrapper.m_Player1Movement_SelectNextFinger;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
+        public InputActionMap Get() { return m_Wrapper.m_Player1Movement; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -349,9 +449,9 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="PlayerMovementActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="Player1MovementActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(PlayerMovementActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(Player1MovementActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -359,17 +459,20 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="PlayerMovementActions" />
-        public void AddCallbacks(IPlayerMovementActions instance)
+        /// <seealso cref="Player1MovementActions" />
+        public void AddCallbacks(IPlayer1MovementActions instance)
         {
-            if (instance == null || m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Add(instance);
-            @team1Movement.started += instance.OnTeam1Movement;
-            @team1Movement.performed += instance.OnTeam1Movement;
-            @team1Movement.canceled += instance.OnTeam1Movement;
-            @team2Movement.started += instance.OnTeam2Movement;
-            @team2Movement.performed += instance.OnTeam2Movement;
-            @team2Movement.canceled += instance.OnTeam2Movement;
+            if (instance == null || m_Wrapper.m_Player1MovementActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_Player1MovementActionsCallbackInterfaces.Add(instance);
+            @teamMovement.started += instance.OnTeamMovement;
+            @teamMovement.performed += instance.OnTeamMovement;
+            @teamMovement.canceled += instance.OnTeamMovement;
+            @SelectPreviousFinger.started += instance.OnSelectPreviousFinger;
+            @SelectPreviousFinger.performed += instance.OnSelectPreviousFinger;
+            @SelectPreviousFinger.canceled += instance.OnSelectPreviousFinger;
+            @SelectNextFinger.started += instance.OnSelectNextFinger;
+            @SelectNextFinger.performed += instance.OnSelectNextFinger;
+            @SelectNextFinger.canceled += instance.OnSelectNextFinger;
         }
 
         /// <summary>
@@ -378,24 +481,27 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="PlayerMovementActions" />
-        private void UnregisterCallbacks(IPlayerMovementActions instance)
+        /// <seealso cref="Player1MovementActions" />
+        private void UnregisterCallbacks(IPlayer1MovementActions instance)
         {
-            @team1Movement.started -= instance.OnTeam1Movement;
-            @team1Movement.performed -= instance.OnTeam1Movement;
-            @team1Movement.canceled -= instance.OnTeam1Movement;
-            @team2Movement.started -= instance.OnTeam2Movement;
-            @team2Movement.performed -= instance.OnTeam2Movement;
-            @team2Movement.canceled -= instance.OnTeam2Movement;
+            @teamMovement.started -= instance.OnTeamMovement;
+            @teamMovement.performed -= instance.OnTeamMovement;
+            @teamMovement.canceled -= instance.OnTeamMovement;
+            @SelectPreviousFinger.started -= instance.OnSelectPreviousFinger;
+            @SelectPreviousFinger.performed -= instance.OnSelectPreviousFinger;
+            @SelectPreviousFinger.canceled -= instance.OnSelectPreviousFinger;
+            @SelectNextFinger.started -= instance.OnSelectNextFinger;
+            @SelectNextFinger.performed -= instance.OnSelectNextFinger;
+            @SelectNextFinger.canceled -= instance.OnSelectNextFinger;
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="PlayerMovementActions.UnregisterCallbacks(IPlayerMovementActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="Player1MovementActions.UnregisterCallbacks(IPlayer1MovementActions)" />.
         /// </summary>
-        /// <seealso cref="PlayerMovementActions.UnregisterCallbacks(IPlayerMovementActions)" />
-        public void RemoveCallbacks(IPlayerMovementActions instance)
+        /// <seealso cref="Player1MovementActions.UnregisterCallbacks(IPlayer1MovementActions)" />
+        public void RemoveCallbacks(IPlayer1MovementActions instance)
         {
-            if (m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_Player1MovementActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -405,21 +511,139 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="PlayerMovementActions.AddCallbacks(IPlayerMovementActions)" />
-        /// <seealso cref="PlayerMovementActions.RemoveCallbacks(IPlayerMovementActions)" />
-        /// <seealso cref="PlayerMovementActions.UnregisterCallbacks(IPlayerMovementActions)" />
-        public void SetCallbacks(IPlayerMovementActions instance)
+        /// <seealso cref="Player1MovementActions.AddCallbacks(IPlayer1MovementActions)" />
+        /// <seealso cref="Player1MovementActions.RemoveCallbacks(IPlayer1MovementActions)" />
+        /// <seealso cref="Player1MovementActions.UnregisterCallbacks(IPlayer1MovementActions)" />
+        public void SetCallbacks(IPlayer1MovementActions instance)
         {
-            foreach (var item in m_Wrapper.m_PlayerMovementActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_Player1MovementActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_Player1MovementActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="PlayerMovementActions" /> instance referencing this action map.
+    /// Provides a new <see cref="Player1MovementActions" /> instance referencing this action map.
     /// </summary>
-    public PlayerMovementActions @PlayerMovement => new PlayerMovementActions(this);
+    public Player1MovementActions @Player1Movement => new Player1MovementActions(this);
+
+    // Player2Movement
+    private readonly InputActionMap m_Player2Movement;
+    private List<IPlayer2MovementActions> m_Player2MovementActionsCallbackInterfaces = new List<IPlayer2MovementActions>();
+    private readonly InputAction m_Player2Movement_teamMovement;
+    private readonly InputAction m_Player2Movement_SelectPreviousFinger;
+    private readonly InputAction m_Player2Movement_SelectNextFinger;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Player2Movement".
+    /// </summary>
+    public struct Player2MovementActions
+    {
+        private @InputScheme m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public Player2MovementActions(@InputScheme wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Player2Movement/teamMovement".
+        /// </summary>
+        public InputAction @teamMovement => m_Wrapper.m_Player2Movement_teamMovement;
+        /// <summary>
+        /// Provides access to the underlying input action "Player2Movement/SelectPreviousFinger".
+        /// </summary>
+        public InputAction @SelectPreviousFinger => m_Wrapper.m_Player2Movement_SelectPreviousFinger;
+        /// <summary>
+        /// Provides access to the underlying input action "Player2Movement/SelectNextFinger".
+        /// </summary>
+        public InputAction @SelectNextFinger => m_Wrapper.m_Player2Movement_SelectNextFinger;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Player2Movement; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="Player2MovementActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(Player2MovementActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="Player2MovementActions" />
+        public void AddCallbacks(IPlayer2MovementActions instance)
+        {
+            if (instance == null || m_Wrapper.m_Player2MovementActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_Player2MovementActionsCallbackInterfaces.Add(instance);
+            @teamMovement.started += instance.OnTeamMovement;
+            @teamMovement.performed += instance.OnTeamMovement;
+            @teamMovement.canceled += instance.OnTeamMovement;
+            @SelectPreviousFinger.started += instance.OnSelectPreviousFinger;
+            @SelectPreviousFinger.performed += instance.OnSelectPreviousFinger;
+            @SelectPreviousFinger.canceled += instance.OnSelectPreviousFinger;
+            @SelectNextFinger.started += instance.OnSelectNextFinger;
+            @SelectNextFinger.performed += instance.OnSelectNextFinger;
+            @SelectNextFinger.canceled += instance.OnSelectNextFinger;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="Player2MovementActions" />
+        private void UnregisterCallbacks(IPlayer2MovementActions instance)
+        {
+            @teamMovement.started -= instance.OnTeamMovement;
+            @teamMovement.performed -= instance.OnTeamMovement;
+            @teamMovement.canceled -= instance.OnTeamMovement;
+            @SelectPreviousFinger.started -= instance.OnSelectPreviousFinger;
+            @SelectPreviousFinger.performed -= instance.OnSelectPreviousFinger;
+            @SelectPreviousFinger.canceled -= instance.OnSelectPreviousFinger;
+            @SelectNextFinger.started -= instance.OnSelectNextFinger;
+            @SelectNextFinger.performed -= instance.OnSelectNextFinger;
+            @SelectNextFinger.canceled -= instance.OnSelectNextFinger;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="Player2MovementActions.UnregisterCallbacks(IPlayer2MovementActions)" />.
+        /// </summary>
+        /// <seealso cref="Player2MovementActions.UnregisterCallbacks(IPlayer2MovementActions)" />
+        public void RemoveCallbacks(IPlayer2MovementActions instance)
+        {
+            if (m_Wrapper.m_Player2MovementActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="Player2MovementActions.AddCallbacks(IPlayer2MovementActions)" />
+        /// <seealso cref="Player2MovementActions.RemoveCallbacks(IPlayer2MovementActions)" />
+        /// <seealso cref="Player2MovementActions.UnregisterCallbacks(IPlayer2MovementActions)" />
+        public void SetCallbacks(IPlayer2MovementActions instance)
+        {
+            foreach (var item in m_Wrapper.m_Player2MovementActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_Player2MovementActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="Player2MovementActions" /> instance referencing this action map.
+    /// </summary>
+    public Player2MovementActions @Player2Movement => new Player2MovementActions(this);
     private int m_NewControlSchemeSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -434,25 +658,61 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
         }
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "PlayerMovement" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player1Movement" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="PlayerMovementActions.AddCallbacks(IPlayerMovementActions)" />
-    /// <seealso cref="PlayerMovementActions.RemoveCallbacks(IPlayerMovementActions)" />
-    public interface IPlayerMovementActions
+    /// <seealso cref="Player1MovementActions.AddCallbacks(IPlayer1MovementActions)" />
+    /// <seealso cref="Player1MovementActions.RemoveCallbacks(IPlayer1MovementActions)" />
+    public interface IPlayer1MovementActions
     {
         /// <summary>
-        /// Method invoked when associated input action "team1Movement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "teamMovement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnTeam1Movement(InputAction.CallbackContext context);
+        void OnTeamMovement(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "team2Movement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "SelectPreviousFinger" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnTeam2Movement(InputAction.CallbackContext context);
+        void OnSelectPreviousFinger(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SelectNextFinger" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSelectNextFinger(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player2Movement" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="Player2MovementActions.AddCallbacks(IPlayer2MovementActions)" />
+    /// <seealso cref="Player2MovementActions.RemoveCallbacks(IPlayer2MovementActions)" />
+    public interface IPlayer2MovementActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "teamMovement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTeamMovement(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SelectPreviousFinger" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSelectPreviousFinger(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SelectNextFinger" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSelectNextFinger(InputAction.CallbackContext context);
     }
 }
