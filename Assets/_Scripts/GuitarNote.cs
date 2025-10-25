@@ -33,22 +33,25 @@ public class GuitarNote : MonoBehaviour
 
         // 3. Set the child's local position to match the collider's offset
         visualTransform.localPosition = collider.offset;
+        visualTransform.localScale = new Vector3(collider.size.x, collider.size.y, 1f);
 
-        // 4. Assign the sprite from our GameManager
+
+    }
+
+    void Start()
+    {
+        // 1. Get the sprite (Instance is guaranteed to exist now)
         if (visual.sprite == null)
         {
             visual.sprite = GameManager.Instance.noteSprite;
         }
 
-        // 5. Set the draw mode and size to match the collider
-        visual.drawMode = SpriteDrawMode.Sliced;
-        visual.size = collider.size;
+        // 2. Set final properties
         visual.sortingOrder = 1;
 
-        // 6. Set the default color to be invisible (Alpha = 0)
-        defaultColor = visual.color; // Get its current color
-        defaultColor.a = 0f; // Set alpha to 0
-        visual.color = defaultColor; // Apply it
+        defaultColor = visual.color;
+        defaultColor.a = 0f;
+        visual.color = defaultColor;
     }
 
     /// <summary>

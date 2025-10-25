@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections; // <-- ADD THIS LINE
 
 public class GameManager : MonoBehaviour
 {
@@ -7,8 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Game Links")]
-    public HandController team1Hand;
-    public HandController team2Hand;
+    //public HandController team1Hand;
+    //public HandController team2Hand;
 
     //public FingerTip team1FingerTip;
     //public FingerTip team2FingerTip;
@@ -63,6 +64,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Wait one frame so all GuitarNote.Start() methods can finish
+        StartCoroutine(DelayedGameStart());
+    }
+
+    private IEnumerator DelayedGameStart()
+    {
+        // Wait for one frame
+        yield return null;
+
+        // Now it's safe to start the game
         StartGame();
     }
 
@@ -92,7 +103,7 @@ public class GameManager : MonoBehaviour
 
         // 3. Pick new notes
         _team1TargetNote = PickRandomNote();
-        _team2TargetNote = PickRandomNote();
+        _team2TargetNote = PickRandomNote(_team1TargetNote); // This version avoids the first note
 
         // 4. Highlight new notes (using the new color)
         if (_team1TargetNote != null)
@@ -220,5 +231,27 @@ public class GameManager : MonoBehaviour
         // Just pick a random note from the list. Simple!
         int randomIndex = Random.Range(0, _allNotes.Count);
         return _allNotes[randomIndex];
+    }
+
+    GuitarNote PickRandomNote(GuitarNote noteToAvoid)
+    {
+        // If we can't avoid, just return a random one
+        if (_allNotes.Count <= 1)
+        {
+            return PickRandomNote();
+        }
+
+        GuitarNote newNote;
+        int safetyBreak = 100; // Prevents infinite loops
+
+        do
+        {
+            newNote = PickRandomNote();
+            safetyBreak--;
+        }
+        // Keep picking a new note *until* it's not the one we want to avoid
+        while (newNote == noteToAvoid && safetyBreak > 0);
+
+        return newNote;
     }
 }
