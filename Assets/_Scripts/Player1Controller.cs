@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player1Controller : BaseController
-{    
-    
+{
+
     public FrogHandController frogHand;
     [SerializeField] public Transform thisTrans;
 
     [SerializeField] public int ScoreCounter;
-    
+
 
     void OnEnable()
     {
@@ -22,19 +22,21 @@ public class Player1Controller : BaseController
 
     }
 
-    void Awake(){
+    void Awake()
+    {
         playerInputActions = new InputScheme();
     }
 
 
-    void OnDisable(){
+    void OnDisable()
+    {
         playerInputActions.Player1Movement.Disable();
     }
 
 
     void FixedUpdate()
     {
-        moveCurrentFinger(5);
+        moveCurrentFinger(frogHand.getMoveSpeed());
     }
 
     public void selectCharacter()
@@ -51,7 +53,7 @@ public class Player1Controller : BaseController
         //Debug.Log(fingerTargetList.Count);
         fingerMinDistanceList = frogHand.getMinDistancesList();
         fingerMaxDistanceList = frogHand.getMaxDistancesList();
-        
+
         currentFingerTarget = fingerTargetList[0];
         //Debug.Log(fingerTargetList.Count);
     }
@@ -80,20 +82,24 @@ public class Player1Controller : BaseController
         }
 
     }
-        public void SelectNextFinger(){
+    public void SelectNextFinger()
+    {
         //Debug.Log("currentFingerIndex = " + currentFingerIndex);
         try
         {
-            if (currentFingerIndex == fingerTargetList.Count-1){
-            currentFingerIndex = 0;
-            currentFingerTarget = fingerTargetList[currentFingerIndex]; 
-            
+            if (currentFingerIndex == fingerTargetList.Count - 1)
+            {
+                currentFingerIndex = 0;
+                currentFingerTarget = fingerTargetList[currentFingerIndex];
+
+            }
+            else
+            {
+                currentFingerIndex++;
+                currentFingerTarget = fingerTargetList[currentFingerIndex];
+            }
         }
-        else{
-            currentFingerIndex++;
-            currentFingerTarget = fingerTargetList[currentFingerIndex];
-        }
-        } catch (Exception e)
+        catch (Exception e)
         {
             Debug.Log(e.ToString());
         }
@@ -124,7 +130,7 @@ public class Player1Controller : BaseController
 
     }
 
-        public void SelectPreviousFinger()
+    public void SelectPreviousFinger()
     {
         //Debug.Log("currentFingerIndex = " + currentFingerIndex);
         try
@@ -188,8 +194,9 @@ public class Player1Controller : BaseController
     }
 
 
-    public void finalPointAggregator(){
-        
+    public void finalPointAggregator()
+    {
+
     }
 
 }

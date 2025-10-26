@@ -339,8 +339,8 @@ public class GameManager : MonoBehaviour
         {
             team2Player.GetComponent<Player2Controller>().frogHand.resetMoveSpeed();
         }
-        //inputManager.SetSlippery(1, false);
-        //inputManager.SetSlippery(2, false);
+        //team1Player.GetComponent<Player1Controller>().frogHand.SetSlippery(false);
+        //team2Player.GetComponent<Player2Controller>().frogHand.SetSlippery(false);
         mainCamera.transform.rotation = Quaternion.identity;
 
         // --- Apply the selected debuff ---
@@ -350,10 +350,10 @@ public class GameManager : MonoBehaviour
                 team1Player.GetComponent<Player1Controller>().frogHand.setMoveSpeed(speedDebuffMultiplier);
                 team2Player.GetComponent<Player2Controller>().frogHand.setMoveSpeed(speedDebuffMultiplier);
                 break;
-            /*case DebuffType.Slippery:
-                inputManager.SetSlippery(1, true);
-                inputManager.SetSlippery(2, true);
-                break;*/
+            //case DebuffType.Slippery:
+            //    team1Player.GetComponent<Player1Controller>().frogHand.SetSlippery(true);
+            //    team2Player.GetComponent<Player2Controller>().frogHand.SetSlippery(true);
+            //    break;
             case DebuffType.FlipScreen:
                 mainCamera.transform.rotation = Quaternion.Euler(0, 0, 180);
                 break;

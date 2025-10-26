@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player2Controller : BaseController
-{    
-    
+{
+
     public FrogHandController frogHand;
     [SerializeField] public Transform thisTrans;
-    
+
 
     void OnEnable()
     {
@@ -20,19 +20,21 @@ public class Player2Controller : BaseController
 
     }
 
-    void Awake(){
+    void Awake()
+    {
         playerInputActions = new InputScheme();
     }
 
 
-    void OnDisable(){
+    void OnDisable()
+    {
         playerInputActions.Player2Movement.Disable();
     }
 
 
     void FixedUpdate()
     {
-        moveCurrentFinger(5);
+        moveCurrentFinger(frogHand.getMoveSpeed());
     }
 
     public void selectCharacter()
@@ -55,9 +57,9 @@ public class Player2Controller : BaseController
 
         //Debug.Log(fingerTargetList.Count);
     }
-    
 
-public void SelectNextFingerDebug(InputAction.CallbackContext context)
+
+    public void SelectNextFingerDebug(InputAction.CallbackContext context)
     {
         //Debug.Log("currentFingerIndex = " + currentFingerIndex);
         try
@@ -80,20 +82,24 @@ public void SelectNextFingerDebug(InputAction.CallbackContext context)
         }
 
     }
-        public void SelectNextFinger(){
+    public void SelectNextFinger()
+    {
         //Debug.Log("currentFingerIndex = " + currentFingerIndex);
         try
         {
-            if (currentFingerIndex == fingerTargetList.Count-1){
-            currentFingerIndex = 0;
-            currentFingerTarget = fingerTargetList[currentFingerIndex]; 
-            
+            if (currentFingerIndex == fingerTargetList.Count - 1)
+            {
+                currentFingerIndex = 0;
+                currentFingerTarget = fingerTargetList[currentFingerIndex];
+
+            }
+            else
+            {
+                currentFingerIndex++;
+                currentFingerTarget = fingerTargetList[currentFingerIndex];
+            }
         }
-        else{
-            currentFingerIndex++;
-            currentFingerTarget = fingerTargetList[currentFingerIndex];
-        }
-        } catch (Exception e)
+        catch (Exception e)
         {
             Debug.Log(e.ToString());
         }
@@ -124,7 +130,7 @@ public void SelectNextFingerDebug(InputAction.CallbackContext context)
 
     }
 
-        public void SelectPreviousFinger()
+    public void SelectPreviousFinger()
     {
         //Debug.Log("currentFingerIndex = " + currentFingerIndex);
         try
@@ -148,8 +154,9 @@ public void SelectNextFingerDebug(InputAction.CallbackContext context)
 
 
     }
-    
-    public void moveCurrentFinger(float animalMoveSpeed){
+
+    public void moveCurrentFinger(float animalMoveSpeed)
+    {
         Vector2 movementInput = playerInputActions.Player2Movement.teamMovement.ReadValue<Vector2>();
         //Debug.Log(currentFingerTarget);
         Vector3 futurePosition = currentFingerTarget.position + new Vector3(movementInput.x, movementInput.y, 0) * animalMoveSpeed * Time.deltaTime;
@@ -157,21 +164,22 @@ public void SelectNextFingerDebug(InputAction.CallbackContext context)
 
         if (calculatedDistance > fingerMinDistanceList[currentFingerIndex] && calculatedDistance < fingerMaxDistanceList[currentFingerIndex])
         {
-          
+
             //calculate % difference in distance to apply to scale
             float doubleMinDist = fingerMinDistanceList[currentFingerIndex] * 2;
-            if (calculatedDistance > doubleMinDist ){
+            if (calculatedDistance > doubleMinDist)
+            {
                 // float PercentageDifference = calculatedDistance / (fingerMinDistanceList[currentFingerIndex] * 2);
                 // fingerPointList[currentFingerIndex].localScale      = new Vector3(1f + (1f - PercentageDifference), fingerPointList[currentFingerIndex].localScale.y, fingerPointList[currentFingerIndex].localScale.z);
                 // fingerJointList[currentFingerIndex].localScale      = new Vector3(1f + (1f -PercentageDifference), fingerJointList[currentFingerIndex].localScale.y, fingerJointList[currentFingerIndex].localScale.z);
                 // fingerknuckleList[currentFingerIndex].localScale    = new Vector3(1f + (1f -PercentageDifference), fingerknuckleList[currentFingerIndex].localScale.y,fingerknuckleList[currentFingerIndex].localScale.z);
-            
+
             }
             currentFingerTarget.position += new Vector3(movementInput.x, movementInput.y, 0) * animalMoveSpeed * Time.deltaTime;
         }
-        
 
-        
+
+
     }
-    
+
 }
