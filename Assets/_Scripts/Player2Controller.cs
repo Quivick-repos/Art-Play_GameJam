@@ -14,8 +14,8 @@ public class Player2Controller : BaseController
     {
         selectCharacter();
         playerInputActions.Player2Movement.Enable();
-        playerInputActions.Player2Movement.SelectNextFinger.performed += SelectNextFinger;
-        playerInputActions.Player2Movement.SelectPreviousFinger.performed += SelectPreviousFinger;
+        playerInputActions.Player2Movement.SelectNextFinger.performed += SelectNextFingerDebug;
+        playerInputActions.Player2Movement.SelectPreviousFinger.performed += SelectPreviousFingerDebug;
 
 
     }
@@ -57,13 +57,37 @@ public class Player2Controller : BaseController
     }
     
 
-    public void SelectNextFinger(InputAction.CallbackContext context){
+public void SelectNextFingerDebug(InputAction.CallbackContext context)
+    {
+        //Debug.Log("currentFingerIndex = " + currentFingerIndex);
+        try
+        {
+            if (currentFingerIndex == fingerTargetList.Count - 1)
+            {
+                currentFingerIndex = 0;
+                currentFingerTarget = fingerTargetList[currentFingerIndex];
+
+            }
+            else
+            {
+                currentFingerIndex++;
+                currentFingerTarget = fingerTargetList[currentFingerIndex];
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.ToString());
+        }
+
+    }
+        public void SelectNextFinger(){
         //Debug.Log("currentFingerIndex = " + currentFingerIndex);
         try
         {
             if (currentFingerIndex == fingerTargetList.Count-1){
             currentFingerIndex = 0;
             currentFingerTarget = fingerTargetList[currentFingerIndex]; 
+            
         }
         else{
             currentFingerIndex++;
@@ -75,7 +99,32 @@ public class Player2Controller : BaseController
         }
 
     }
-    public void SelectPreviousFinger(InputAction.CallbackContext context)
+    public void SelectPreviousFingerDebug(InputAction.CallbackContext context)
+    {
+        //Debug.Log("currentFingerIndex = " + currentFingerIndex);
+        try
+        {
+            if (currentFingerIndex == 0)
+            {
+                currentFingerIndex = fingerTargetList.Count - 1;
+                currentFingerTarget = fingerTargetList[currentFingerIndex];
+            }
+            else
+            {
+                currentFingerIndex--;
+                currentFingerTarget = fingerTargetList[currentFingerIndex];
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.ToString());
+        }
+
+
+
+    }
+
+        public void SelectPreviousFinger()
     {
         //Debug.Log("currentFingerIndex = " + currentFingerIndex);
         try

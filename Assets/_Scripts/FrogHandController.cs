@@ -84,7 +84,7 @@ public class FrogHandController{
 
         public List<float> getMaxDistancesList()
     {
-        return new List<float> { LeftFingerTargetToKnuckleDistance*1.8f, MiddleFingerTargetToKnuckleDistance*1.8f, RightFingerTargetToKnuckleDistance*1.8f};
+        return new List<float> { LeftFingerTargetToKnuckleDistance*2f, MiddleFingerTargetToKnuckleDistance*2f, RightFingerTargetToKnuckleDistance*2f};
 
     }
 

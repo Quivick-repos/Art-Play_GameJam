@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 77029726}
   m_Layer: 0
   m_Name: Fret 1
-  m_TagString: Untagged
+  m_TagString: Strings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -861,7 +861,7 @@ GameObject:
   - component: {fileID: 319473974}
   m_Layer: 0
   m_Name: Fret 4
-  m_TagString: Untagged
+  m_TagString: Strings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2115,7 +2115,7 @@ GameObject:
   - component: {fileID: 557649005}
   m_Layer: 0
   m_Name: Fret 6
-  m_TagString: Untagged
+  m_TagString: Strings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2376,7 +2376,7 @@ GameObject:
   - component: {fileID: 631879393}
   m_Layer: 0
   m_Name: Metal Bar
-  m_TagString: Untagged
+  m_TagString: MetalBars
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2901,7 +2901,7 @@ GameObject:
   - component: {fileID: 764948587}
   m_Layer: 0
   m_Name: Fret 5
-  m_TagString: Untagged
+  m_TagString: Strings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3049,6 +3049,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6ee5273dfbdc04798bfab1c2333555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  team1Player: {fileID: 0}
+  team2Player: {fileID: 0}
   noteSprite: {fileID: 7482667652216324306, guid: af6307b744cebc446a5d098d54d58cd9, type: 3}
   debuffMenuPanel: {fileID: 1900590271}
   gameOverPanel: {fileID: 338638712}
@@ -4136,6 +4138,52 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.15385318, y: 1.7735825}
   m_EdgeRadius: 0
+--- !u!1 &1248376601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1248376603}
+  - component: {fileID: 1248376602}
+  m_Layer: 0
+  m_Name: Player2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1248376602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248376601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1086fe83e5e15070798792bf067723a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player2Controller
+  moveSpeed: 5
+  thisTrans: {fileID: 1248376603}
+--- !u!4 &1248376603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248376601}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7066617, w: 0.70755166}
+  m_LocalPosition: {x: 6.05, y: 0.21, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 89.928}
 --- !u!1 &1269580292
 GameObject:
   m_ObjectHideFlags: 0
@@ -6385,7 +6433,7 @@ GameObject:
   - component: {fileID: 1985359212}
   m_Layer: 0
   m_Name: Fret 3
-  m_TagString: Untagged
+  m_TagString: Strings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6525,7 +6573,7 @@ GameObject:
   - component: {fileID: 2002923591}
   m_Layer: 0
   m_Name: Fret 2
-  m_TagString: Untagged
+  m_TagString: Strings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6655,7 +6703,7 @@ GameObject:
   - component: {fileID: 2046525077}
   m_Layer: 0
   m_Name: Fret 0
-  m_TagString: Untagged
+  m_TagString: Strings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6960,6 +7008,53 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.12768793, y: 1.8219604}
   m_EdgeRadius: 0
+--- !u!1 &2135847444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2135847446}
+  - component: {fileID: 2135847445}
+  m_Layer: 0
+  m_Name: Player1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2135847445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135847444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9a7f2e8f3a7cf3181450fdebf55b22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player1Controller
+  moveSpeed: 5
+  thisTrans: {fileID: 2135847446}
+  ScoreCounter: 0
+--- !u!4 &2135847446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135847444}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.70733637, w: 0.70687723}
+  m_LocalPosition: {x: -4.48, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.037}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -6970,3 +7065,5 @@ SceneRoots:
   - {fileID: 802408161}
   - {fileID: 1993511770}
   - {fileID: 699151408}
+  - {fileID: 2135847446}
+  - {fileID: 1248376603}

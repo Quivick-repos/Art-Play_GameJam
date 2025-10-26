@@ -8,14 +8,16 @@ public class Player1Controller : BaseController
     
     public FrogHandController frogHand;
     [SerializeField] public Transform thisTrans;
+
+    [SerializeField] public int ScoreCounter;
     
 
     void OnEnable()
     {
         selectCharacter();
         playerInputActions.Player1Movement.Enable();
-        playerInputActions.Player1Movement.SelectNextFinger.performed += SelectNextFinger;
-        playerInputActions.Player1Movement.SelectPreviousFinger.performed += SelectPreviousFinger;
+        playerInputActions.Player1Movement.SelectNextFinger.performed += SelectNextFingerDebug;
+        playerInputActions.Player1Movement.SelectPreviousFinger.performed += SelectPreviousFingerDebug;
 
 
     }
@@ -53,9 +55,32 @@ public class Player1Controller : BaseController
         currentFingerTarget = fingerTargetList[0];
         //Debug.Log(fingerTargetList.Count);
     }
-    
 
-    public void SelectNextFinger(InputAction.CallbackContext context){
+
+    public void SelectNextFingerDebug(InputAction.CallbackContext context)
+    {
+        //Debug.Log("currentFingerIndex = " + currentFingerIndex);
+        try
+        {
+            if (currentFingerIndex == fingerTargetList.Count - 1)
+            {
+                currentFingerIndex = 0;
+                currentFingerTarget = fingerTargetList[currentFingerIndex];
+
+            }
+            else
+            {
+                currentFingerIndex++;
+                currentFingerTarget = fingerTargetList[currentFingerIndex];
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.ToString());
+        }
+
+    }
+        public void SelectNextFinger(){
         //Debug.Log("currentFingerIndex = " + currentFingerIndex);
         try
         {
@@ -74,7 +99,7 @@ public class Player1Controller : BaseController
         }
 
     }
-    public void SelectPreviousFinger(InputAction.CallbackContext context)
+    public void SelectPreviousFingerDebug(InputAction.CallbackContext context)
     {
         //Debug.Log("currentFingerIndex = " + currentFingerIndex);
         try
@@ -98,26 +123,71 @@ public class Player1Controller : BaseController
 
 
     }
-    
-    public void moveCurrentFinger(float animalMoveSpeed){
+
+        public void SelectPreviousFinger()
+    {
+        //Debug.Log("currentFingerIndex = " + currentFingerIndex);
+        try
+        {
+            if (currentFingerIndex == 0)
+            {
+                currentFingerIndex = fingerTargetList.Count - 1;
+                currentFingerTarget = fingerTargetList[currentFingerIndex];
+            }
+            else
+            {
+                currentFingerIndex--;
+                currentFingerTarget = fingerTargetList[currentFingerIndex];
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.ToString());
+        }
+
+
+
+    }
+
+    public void moveCurrentFinger(float animalMoveSpeed)
+    {
         Vector2 movementInput = playerInputActions.Player1Movement.teamMovement.ReadValue<Vector2>();
         Vector3 futurePosition = currentFingerTarget.position + new Vector3(movementInput.x, movementInput.y, 0) * animalMoveSpeed * Time.deltaTime;
         float calculatedDistance = Vector3.Distance(futurePosition, fingerknuckleList[currentFingerIndex].position);
-        if (calculatedDistance > fingerMinDistanceList[currentFingerIndex] && calculatedDistance < fingerMaxDistanceList[currentFingerIndex]){
-          
+        if (calculatedDistance > fingerMinDistanceList[currentFingerIndex] && calculatedDistance < fingerMaxDistanceList[currentFingerIndex])
+        {
+
             //calculate % difference in distance to apply to scale
             float doubleMinDist = fingerMinDistanceList[currentFingerIndex] * 2;
-            if (calculatedDistance > doubleMinDist ){
+            if (calculatedDistance > doubleMinDist)
+            {
                 float PercentageDifference = calculatedDistance / doubleMinDist;
                 Debug.Log("Difference percentage" + PercentageDifference);
-                fingerPointList[currentFingerIndex].localScale = new Vector3(PercentageDifference, fingerPointList[currentFingerIndex].localScale.y, fingerPointList[currentFingerIndex].localScale.z);
+                //fingerPointList[currentFingerIndex].localScale = new Vector3(PercentageDifference, fingerPointList[currentFingerIndex].localScale.y, fingerPointList[currentFingerIndex].localScale.z);
                 //fingerPointList[currentFingerIndex].GetComponent<CircleCollider2D>().transform.localScale = Vector3.one;
-                fingerJointList[currentFingerIndex].localScale      = new Vector3(PercentageDifference, fingerJointList[currentFingerIndex].localScale.y, fingerJointList[currentFingerIndex].localScale.z);
-                fingerknuckleList[currentFingerIndex].localScale    = new Vector3(PercentageDifference, fingerknuckleList[currentFingerIndex].localScale.y,fingerknuckleList[currentFingerIndex].localScale.z);
-            
+                //fingerJointList[currentFingerIndex].localScale      = new Vector3(PercentageDifference, fingerJointList[currentFingerIndex].localScale.y, fingerJointList[currentFingerIndex].localScale.z);
+                //fingerknuckleList[currentFingerIndex].localScale    = new Vector3(PercentageDifference, PercentageDifference,fingerknuckleList[currentFingerIndex].localScale.z);
+
             }
             currentFingerTarget.position += new Vector3(movementInput.x, movementInput.y, 0) * animalMoveSpeed * Time.deltaTime;
         }
     }
-    
+
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Strings")
+        {
+            /////TODO play sliding sstring sound here
+
+        }
+
+    }
+
+
+    public void finalPointAggregator(){
+        
+    }
+
 }

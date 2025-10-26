@@ -10,10 +10,8 @@ public class GameManager : MonoBehaviour
     private enum NoteHitState { Correct, Fail_Bar, Fail_Miss }
 
     [Header("Game Links")]
-    //public HandController team1Hand;
-    //public HandController team2Hand;
-    //public FingerTip team1FingerTip;
-    //public FingerTip team2FingerTip;
+    public GameObject team1Player;
+    public GameObject team2Player;
     [SerializeField] private Sprite noteSprite;
 
     public Sprite NoteSprite => noteSprite;
@@ -25,7 +23,6 @@ public class GameManager : MonoBehaviour
     [Header("Debuff Settings")]
     [SerializeField] private float speedDebuffMultiplier = 0.5f;
 
-    // --- REPLACED team-specific debuffs with one ---
     private DebuffType _nextDebuff = DebuffType.None;
 
     [Header("Guitar Setup")]
@@ -164,6 +161,10 @@ public class GameManager : MonoBehaviour
     {
         _isRoundActive = false;
         Debug.Log("--- ROUND END ---");
+        team1Player.GetComponent<Player1Controller>().SelectNextFinger();
+        team2Player.GetComponent<Player2Controller>().SelectNextFinger();
+
+
 
         // --- Check Team 1's state and play sound ---
         NoteHitState team1State = CheckWinCondition(_team1TargetNote /* , team1FingerTip */);
