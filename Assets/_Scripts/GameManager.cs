@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
     public enum DebuffType { None, SpeedReduction, Slippery, FlipScreen };
+    private enum NoteHitState { Correct, Fail_Bar, Fail_Miss }
 
     [Header("Game Links")]
     //public HandController team1Hand;
@@ -164,19 +165,43 @@ public class GameManager : MonoBehaviour
         _isRoundActive = false;
         Debug.Log("--- ROUND END ---");
 
-        // Check Team 1's "locked" position
-        //if (CheckWinCondition(team1FingerTip, _team1TargetNote))
-        //{
-        //    _team1Score++;
-        //    Debug.Log("Team 1 Scored!");
-        //}
+        // --- Check Team 1's state and play sound ---
+        NoteHitState team1State = CheckWinCondition(_team1TargetNote /* , team1FingerTip */);
+        if (team1State == NoteHitState.Correct)
+        {
+            _team1Score++;
+            Debug.Log("Team 1 Scored!");
+            AudioManager.Instance.PlayCorrectNote(_team1TargetNote.StringIndex);
+        }
+        else if (team1State == NoteHitState.Fail_Bar)
+        {
+            Debug.Log("Team 1 hit a bar!");
+            AudioManager.Instance.PlayFailBarSound();
+        }
+        else // Must be Fail_Miss
+        {
+            Debug.Log("Team 1 missed!");
+            AudioManager.Instance.PlayFailMissSound();
+        }
 
-        // Check Team 2's "locked" position
-        //if (CheckWinCondition(team2FingerTip, _team2TargetNote))
-        //{
-        //    _team2Score++;
-        //    Debug.Log("Team 2 Scored!");
-        //}
+        // --- Check Team 2's state and play sound ---
+        NoteHitState team2State = CheckWinCondition(_team2TargetNote /* , team2FingerTip */);
+        if (team2State == NoteHitState.Correct)
+        {
+            _team2Score++;
+            Debug.Log("Team 2 Scored!");
+            AudioManager.Instance.PlayCorrectNote(_team2TargetNote.StringIndex);
+        }
+        else if (team2State == NoteHitState.Fail_Bar)
+        {
+            Debug.Log("Team 2 hit a bar!");
+            AudioManager.Instance.PlayFailBarSound();
+        }
+        else // Must be Fail_Miss
+        {
+            Debug.Log("Team 2 missed!");
+            AudioManager.Instance.PlayFailMissSound();
+        }
 
         // Update score UI
         // team1ScoreText.text = _team1Score.ToString();
@@ -194,21 +219,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    /*bool CheckWinCondition(FingerTip tip, GuitarNote target)
+    // --- TEMPORARY CheckWinCondition (until you have FingerTip) ---
+    NoteHitState CheckWinCondition(GuitarNote target /*, FingerTip tip */)
     {
-        // Must NOT be touching a fail zone
+        // Remove comments when you have the real FingerTip script
+        /*
+        // Priority #1: Hitting a metal bar is an instant fail
         if (tip.isTouchingFailZone)
         {
-            return false;
-        }
-        // Must BE touching the correct note
-        if (tip.currentNote == target)
-        {
-            return true;
+            return NoteHitState.Fail_Bar;
         }
 
-        return false;
-    }*/
+        // Priority #2: Hitting the correct note
+        if (tip.currentNote == target)
+        {
+            return NoteHitState.Correct;
+        }
+        */
+
+        // Priority #3: Anything else is a miss (Always returns this for now)
+        return NoteHitState.Fail_Miss;
+    }
 
     void EndGame()
     {
