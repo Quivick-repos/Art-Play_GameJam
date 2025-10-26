@@ -162,14 +162,16 @@ public class Player1Controller : BaseController
             if (calculatedDistance > doubleMinDist)
             {
                 float PercentageDifference = calculatedDistance / doubleMinDist;
-                Debug.Log("Difference percentage" + PercentageDifference);
+                //Debug.Log("Difference percentage" + PercentageDifference);
                 //fingerPointList[currentFingerIndex].localScale = new Vector3(PercentageDifference, fingerPointList[currentFingerIndex].localScale.y, fingerPointList[currentFingerIndex].localScale.z);
                 //fingerPointList[currentFingerIndex].GetComponent<CircleCollider2D>().transform.localScale = Vector3.one;
                 //fingerJointList[currentFingerIndex].localScale      = new Vector3(PercentageDifference, fingerJointList[currentFingerIndex].localScale.y, fingerJointList[currentFingerIndex].localScale.z);
-                //fingerknuckleList[currentFingerIndex].localScale    = new Vector3(PercentageDifference, PercentageDifference,fingerknuckleList[currentFingerIndex].localScale.z);
-
+                //fingerknuckleList[currentFingerIndex].localScale = new Vector3(PercentageDifference, PercentageDifference, fingerknuckleList[currentFingerIndex].localScale.z);
+                //fingerJointList[currentFingerIndex].localScale     = new Vector3(1/PercentageDifference,1,1);;
+                //fingerPointList[currentFingerIndex].localScale = new Vector3(1/PercentageDifference,1,1);
+                //fingerPointList[currentFingerIndex].GetComponent<CircleCollider2D>().transform.localScale = new Vector3(1/PercentageDifference,1,1);
             }
-            currentFingerTarget.position += new Vector3(movementInput.x, movementInput.y, 0) * animalMoveSpeed * Time.deltaTime;
+            //currentFingerTarget.position += new Vector3(movementInput.x, movementInput.y, 0) * animalMoveSpeed * Time.deltaTime;
         }
     }
 

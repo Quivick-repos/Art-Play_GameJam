@@ -151,7 +151,7 @@ public void SelectNextFingerDebug(InputAction.CallbackContext context)
     
     public void moveCurrentFinger(float animalMoveSpeed){
         Vector2 movementInput = playerInputActions.Player2Movement.teamMovement.ReadValue<Vector2>();
-        Debug.Log(currentFingerTarget);
+        //Debug.Log(currentFingerTarget);
         Vector3 futurePosition = currentFingerTarget.position + new Vector3(movementInput.x, movementInput.y, 0) * animalMoveSpeed * Time.deltaTime;
         float calculatedDistance = Vector3.Distance(futurePosition, fingerknuckleList[currentFingerIndex].position);
 
@@ -161,10 +161,10 @@ public void SelectNextFingerDebug(InputAction.CallbackContext context)
             //calculate % difference in distance to apply to scale
             float doubleMinDist = fingerMinDistanceList[currentFingerIndex] * 2;
             if (calculatedDistance > doubleMinDist ){
-                float PercentageDifference = calculatedDistance / (fingerMinDistanceList[currentFingerIndex] * 2);
-                fingerPointList[currentFingerIndex].localScale      = new Vector3(1f + (1f - PercentageDifference), fingerPointList[currentFingerIndex].localScale.y, fingerPointList[currentFingerIndex].localScale.z);
-                fingerJointList[currentFingerIndex].localScale      = new Vector3(1f + (1f -PercentageDifference), fingerJointList[currentFingerIndex].localScale.y, fingerJointList[currentFingerIndex].localScale.z);
-                fingerknuckleList[currentFingerIndex].localScale    = new Vector3(1f + (1f -PercentageDifference), fingerknuckleList[currentFingerIndex].localScale.y,fingerknuckleList[currentFingerIndex].localScale.z);
+                // float PercentageDifference = calculatedDistance / (fingerMinDistanceList[currentFingerIndex] * 2);
+                // fingerPointList[currentFingerIndex].localScale      = new Vector3(1f + (1f - PercentageDifference), fingerPointList[currentFingerIndex].localScale.y, fingerPointList[currentFingerIndex].localScale.z);
+                // fingerJointList[currentFingerIndex].localScale      = new Vector3(1f + (1f -PercentageDifference), fingerJointList[currentFingerIndex].localScale.y, fingerJointList[currentFingerIndex].localScale.z);
+                // fingerknuckleList[currentFingerIndex].localScale    = new Vector3(1f + (1f -PercentageDifference), fingerknuckleList[currentFingerIndex].localScale.y,fingerknuckleList[currentFingerIndex].localScale.z);
             
             }
             currentFingerTarget.position += new Vector3(movementInput.x, movementInput.y, 0) * animalMoveSpeed * Time.deltaTime;

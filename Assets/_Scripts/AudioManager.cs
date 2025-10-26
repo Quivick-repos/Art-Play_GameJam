@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -8,10 +9,16 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
 
     [Header("Clips")]
+    [Tooltip("Sounds of the finger sliding over strings")]
+    [SerializeField] private AudioClip[] slidingOverBarsSound;
+    
+
     [Tooltip("Sound for hitting the metal bar")]
     [SerializeField] private AudioClip failBarSound;
+    
     [Tooltip("Sound for missing completely")]
     [SerializeField] private AudioClip failMissSound;
+
     [Tooltip("Array of sounds, one for each string (index 0 = string 0)")]
     [SerializeField] private AudioClip[] correctStringSounds; // Make sure size matches your string count
 
@@ -62,6 +69,15 @@ public class AudioManager : MonoBehaviour
         if (failMissSound != null)
         {
             audioSource.PlayOneShot(failMissSound);
+        }
+    }
+
+    public void PlaySlidingSound()
+    {
+        int selection = Random.Range(0, slidingOverBarsSound.Length - 1);
+        if (slidingOverBarsSound!=null)
+        {
+            audioSource.PlayOneShot(slidingOverBarsSound[selection]);
         }
     }
 }

@@ -11,8 +11,20 @@ public class FingerCollisionDetection : MonoBehaviour
     }
 
 
-    void OnCollisionEnter2D(Collision2D collision){
-        
+    void OnTriggerEnter2D(Collider2D collider){
+        if (collider.CompareTag("Strings"))
+        {
+            AudioManager.Instance.PlaySlidingSound();
+            Debug.Log("sliding string");
+        }
+        else if (collider.CompareTag("MetalBars"))
+        {
+            Debug.Log("Barras mano");
+        }
+        else
+        {
+            Debug.Log("how");
+        }
     }
 
     // Update is called once per frame
