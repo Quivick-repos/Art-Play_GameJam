@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
     private bool _isRoundActive = false;
     private int _currentGame = 0;
 
+    public bool IsGameplayActive => _isRoundActive;
+
     // [Header("UI Links")]
     // public Text team1ScoreText;
     // public Text team2ScoreText;
@@ -162,6 +164,7 @@ public class GameManager : MonoBehaviour
     void EndRound()
     {
         _isRoundActive = false;
+        AudioManager.Instance?.StopSlidingSound();
         Debug.Log("--- ROUND END ---");
         team1Player.GetComponent<Player1Controller>().SelectNextFinger();
         team2Player.GetComponent<Player2Controller>().SelectNextFinger();
@@ -255,6 +258,7 @@ public class GameManager : MonoBehaviour
         {
             _team2TargetNote.ResetColor();
         }
+        AudioManager.Instance?.StopSlidingSound();
 
         Debug.Log("--- GAME OVER ---");
         if (_team1Score > _team2Score)
@@ -339,8 +343,8 @@ public class GameManager : MonoBehaviour
         {
             team2Player.GetComponent<Player2Controller>().frogHand.resetMoveSpeed();
         }
-        //team1Player.GetComponent<Player1Controller>().frogHand.SetSlippery(false);
-        //team2Player.GetComponent<Player2Controller>().frogHand.SetSlippery(false);
+        team1Player.GetComponent<Player1Controller>().frogHand.SetSlippery(false);
+        team2Player.GetComponent<Player2Controller>().frogHand.SetSlippery(false);
         mainCamera.transform.rotation = Quaternion.identity;
 
         // --- Apply the selected debuff ---
@@ -350,10 +354,10 @@ public class GameManager : MonoBehaviour
                 team1Player.GetComponent<Player1Controller>().frogHand.setMoveSpeed(speedDebuffMultiplier);
                 team2Player.GetComponent<Player2Controller>().frogHand.setMoveSpeed(speedDebuffMultiplier);
                 break;
-            //case DebuffType.Slippery:
-            //    team1Player.GetComponent<Player1Controller>().frogHand.SetSlippery(true);
-            //    team2Player.GetComponent<Player2Controller>().frogHand.SetSlippery(true);
-            //    break;
+            case DebuffType.Slippery:
+                team1Player.GetComponent<Player1Controller>().frogHand.SetSlippery(true);
+                team2Player.GetComponent<Player2Controller>().frogHand.SetSlippery(true);
+                break;
             case DebuffType.FlipScreen:
                 mainCamera.transform.rotation = Quaternion.Euler(0, 0, 180);
                 break;

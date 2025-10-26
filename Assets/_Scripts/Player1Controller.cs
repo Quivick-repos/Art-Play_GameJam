@@ -36,6 +36,13 @@ public class Player1Controller : BaseController
 
     void FixedUpdate()
     {
+        if (GameManager.Instance == null || !GameManager.Instance.IsGameplayActive)
+        {
+            // Optionally reset velocity if slippery mode is active
+            // team1Velocity = Vector3.zero;
+            // team2Velocity = Vector3.zero;
+            return; // Stop processing input/movement
+        }
         moveCurrentFinger(frogHand.getMoveSpeed());
     }
 
@@ -155,7 +162,7 @@ public class Player1Controller : BaseController
 
     }
 
-    public void moveCurrentFinger(float animalMoveSpeed)
+    /*public void moveCurrentFinger(float animalMoveSpeed)
     {
         Vector2 movementInput = playerInputActions.Player1Movement.teamMovement.ReadValue<Vector2>();
         Vector3 futurePosition = currentFingerTarget.position + new Vector3(movementInput.x, movementInput.y, 0) * animalMoveSpeed * Time.deltaTime;
@@ -179,6 +186,66 @@ public class Player1Controller : BaseController
             }
             //currentFingerTarget.position += new Vector3(movementInput.x, movementInput.y, 0) * animalMoveSpeed * Time.deltaTime;
         }
+    }*/
+
+    public void moveCurrentFinger(float animalMoveSpeed)
+    {
+        Vector2 movementInput = playerInputActions.Player1Movement.teamMovement.ReadValue<Vector2>();
+
+        // Calculate the desired velocity based purely on input and speed
+        // This is the direction/speed the player WANTS to go
+        Vector3 targetVelocity = new Vector3(movementInput.x, movementInput.y, 0) * animalMoveSpeed;
+
+        // Calculate where the target WOULD go if moved directly by the desired amount THIS FRAME
+        Vector3 desiredMovementDelta = targetVelocity * Time.deltaTime;
+        Vector3 futurePosition = currentFingerTarget.position + desiredMovementDelta;
+
+        // Check distance constraints using the potential future position
+        float calculatedDistance = Vector3.Distance(futurePosition, fingerknuckleList[currentFingerIndex].position);
+
+        bool isSlippery = frogHand.IsSlippery();
+        // --- MOVEMENT LOGIC ---
+        if (isSlippery)
+        {
+            Vector3 currentVelocity = frogHand.GetCurrentVelocity();
+            // SLIPPERY: Smoothly adjust current velocity towards the target velocity
+            frogHand.SetCurrentVelocity(Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * frogHand.slipperyAcceleration));
+
+            // Check if applying this velocity KEEPS us within bounds
+            Vector3 slipperyFuturePosition = currentFingerTarget.position + (currentVelocity * Time.deltaTime);
+            float slipperyCalculatedDistance = Vector3.Distance(slipperyFuturePosition, fingerknuckleList[currentFingerIndex].position);
+
+            if (slipperyCalculatedDistance > fingerMinDistanceList[currentFingerIndex] && slipperyCalculatedDistance < fingerMaxDistanceList[currentFingerIndex])
+            {
+                // Apply the calculated velocity
+                currentFingerTarget.position += currentVelocity * Time.deltaTime;
+            }
+            else
+            {
+                // We would go out of bounds - dampen velocity instead of moving
+                currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, Time.deltaTime * frogHand.slipperyAcceleration * 2); // Dampen faster
+                                                                                                                                   // Optionally apply the dampened velocity if still within bounds after damping:
+                                                                                                                                   // currentFingerTarget.position += currentVelocity * Time.deltaTime;
+            }
+        }
+        else // NOT Slippery
+        {
+            // NORMAL: Only move if the direct future position is within bounds
+            if (calculatedDistance > fingerMinDistanceList[currentFingerIndex] && calculatedDistance < fingerMaxDistanceList[currentFingerIndex])
+            {
+                // Apply the desired movement directly
+                currentFingerTarget.position += desiredMovementDelta;
+            }
+            // If out of bounds, do nothing (as per your original logic)
+            frogHand.SetCurrentVelocity(Vector3.zero); // Ensure velocity is zeroed
+        }
+
+        // --- Your scaling logic can go here (using calculatedDistance) ---
+        // (Your commented-out scaling code...)
+        // if (calculatedDistance > fingerMinDistanceList[currentFingerIndex] && calculatedDistance < fingerMaxDistanceList[currentFingerIndex])
+        // {
+        //     //calculate % difference...
+        // }
     }
 
 

@@ -25,6 +25,9 @@ public class FrogHandController
     private GameObject frogHand;
     private float defaultMoveSpeed = 5f;
     private float moveSpeed = 5f;
+    private bool isSlippery = false;
+    private Vector3 currentVelocity = Vector3.zero; // Tracks the finger's current speed and direction
+    public float slipperyAcceleration = 1.5f; //Lower is more slippery
 
     public FrogHandController(Transform thisTrans)
     {
@@ -68,6 +71,30 @@ public class FrogHandController
     public void resetMoveSpeed()
     {
         moveSpeed = defaultMoveSpeed;
+    }
+
+    public bool IsSlippery()
+    {
+        return isSlippery;
+    }
+
+    public void SetSlippery(bool slippery)
+    {
+        isSlippery = slippery;
+        if (!isSlippery) // If turning slippery OFF, reset velocity immediately
+        {
+            currentVelocity = Vector3.zero;
+        }
+    }
+
+    public Vector3 GetCurrentVelocity()
+    {
+        return currentVelocity;
+    }
+
+    public void SetCurrentVelocity(Vector3 velocity)
+    {
+        currentVelocity = velocity;
     }
 
     public List<Transform> getFingerTargetList()

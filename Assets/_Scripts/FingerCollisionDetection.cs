@@ -9,6 +9,11 @@ public class FingerCollisionDetection : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        if (GameManager.Instance == null || !GameManager.Instance.IsGameplayActive)
+        {
+            return; // Don't process collisions if game isn't active
+        }
+
         if (collider.CompareTag("Strings"))
         {
             // Increment the count
