@@ -43,7 +43,7 @@ public class GuitarNote : MonoBehaviour
         // 1. Get the sprite (Instance is guaranteed to exist now)
         if (visual.sprite == null)
         {
-            visual.sprite = GameManager.Instance.noteSprite;
+            visual.sprite = GameManager.Instance.NoteSprite;
         }
 
         // 2. Set final properties

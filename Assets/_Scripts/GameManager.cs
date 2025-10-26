@@ -6,13 +6,26 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance;
+    public enum DebuffType { None, SpeedReduction, Slippery, FlipScreen };
 
     [Header("Game Links")]
     //public HandController team1Hand;
     //public HandController team2Hand;
-
     //public FingerTip team1FingerTip;
     //public FingerTip team2FingerTip;
+    [SerializeField] private Sprite noteSprite;
+
+    public Sprite NoteSprite => noteSprite;
+
+    [Header("Debuff Links")]
+    [SerializeField] private GameObject debuffMenuPanel;
+    [SerializeField] private GameObject gameOverPanel;
+
+    [Header("Debuff Settings")]
+    [SerializeField] private float speedDebuffMultiplier = 0.5f;
+
+    // --- REPLACED team-specific debuffs with one ---
+    private DebuffType _nextDebuff = DebuffType.None;
 
     [Header("Guitar Setup")]
     [SerializeField] private GameObject guitarNeckObject;
@@ -20,10 +33,10 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     [SerializeField] private float timePerRound = 5f; // 5 seconds per finger
     [SerializeField] private int numRounds = 3;
+    [SerializeField] private int maxGames = 3;
 
     [Header("Visuals")]
     [SerializeField] private Color targetNoteColor = new Color(0.5f, 1f, 0.5f, 0.7f); // Transparent soft green
-    public Sprite noteSprite; // Assign in Inspector
 
     [Header("Game State")]
     private int _currentRound = 0;
@@ -31,6 +44,7 @@ public class GameManager : MonoBehaviour
     private int _team2Score = 0;
     private float _roundTimer;
     private bool _isRoundActive = false;
+    private int _currentGame = 0;
 
     // [Header("UI Links")]
     // public Text team1ScoreText;
@@ -64,6 +78,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        debuffMenuPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
         // Wait one frame so all GuitarNote.Start() methods can finish
         StartCoroutine(DelayedGameStart());
     }
@@ -79,9 +95,13 @@ public class GameManager : MonoBehaviour
 
     void StartGame()
     {
+        _currentGame++;
         _currentRound = 0;
         _team1Score = 0;
         _team2Score = 0;
+
+        debuffMenuPanel.SetActive(false);
+        ApplyDebuffs();
         StartNewRound();
     }
 
@@ -215,9 +235,29 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("It's a Draw!");
         }
-        // Pause here for debuffs
+
+        if (_currentGame < maxGames)
+        {
+            // We have more games to play, show debuff menu
+            _nextDebuff = DebuffType.None;
+            debuffMenuPanel.SetActive(true);
+            Debug.Log($"Audience, please pick a debuff for Game #{_currentGame + 1}!");
+        }
+        else
+        {
+            // This was the final game, show game over screen
+            Debug.Log("GAME OVER! Thanks for playing!");
+            ShowGameOver();
+        }
         // "Restart" button that calls StartGame()
         // gameOverScreen.SetActive(true); check if game is over, change some of these names
+    }
+
+    void ShowGameOver()
+    {
+        debuffMenuPanel.SetActive(false); // Just in case
+        gameOverPanel.SetActive(true);
+        // This panel could have a "Restart Application" button
     }
 
     GuitarNote PickRandomNote()
@@ -253,5 +293,57 @@ public class GameManager : MonoBehaviour
         while (newNote == noteToAvoid && safetyBreak > 0);
 
         return newNote;
+    }
+
+    // --- MODIFIED ApplyDebuffs() ---
+    private void ApplyDebuffs()
+    {
+        // --- COMMENTED OUT until you have the scripts ---
+        /*
+        // --- Reset all debuffs from last game ---
+        inputManager.SetSpeedMultiplier(1, 1f);
+        inputManager.SetSpeedMultiplier(2, 1f);
+        inputManager.SetSlippery(1, false);
+        inputManager.SetSlippery(2, false);
+        mainCamera.transform.rotation = Quaternion.identity; 
+
+        // --- Apply the ONE debuff to BOTH teams ---
+        switch (_nextDebuff)
+        {
+            case DebuffType.SpeedReduction:
+                inputManager.SetSpeedMultiplier(1, speedDebuffMultiplier);
+                inputManager.SetSpeedMultiplier(2, speedDebuffMultiplier);
+                break;
+            case DebuffType.Slippery:
+                inputManager.SetSlippery(1, true);
+                inputManager.SetSlippery(2, true);
+                break;
+            case DebuffType.FlipScreen:
+                mainCamera.transform.rotation = Quaternion.Euler(0, 0, 180);
+                break;
+        }
+        */
+    }
+
+    // --- NEW PUBLIC UI FUNCTIONS ---
+
+    /// <summary>
+    /// Call this from your debuff buttons (e.g., "Slippery", "Slow").
+    /// </summary>
+    public void SelectDebuff(int debuffIndex)
+    {
+        _nextDebuff = (DebuffType)debuffIndex;
+        Debug.Log($"Audience selected debuff: {(_nextDebuff)}");
+        // You could add a UI element to show "Slippery selected!"
+    }
+
+    /// <summary>
+    /// Call this from your "Start Next Game" button.
+    /// </summary>
+    public void StartNextGame()
+    {
+        // This will hide the panel and call StartGame(),
+        // which calls ApplyDebuffs().
+        StartGame();
     }
 }
