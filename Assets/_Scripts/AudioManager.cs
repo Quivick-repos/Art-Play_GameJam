@@ -5,17 +5,20 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [Header("Audio Source")]
-    [SerializeField] private AudioSource audioSource;
+    [Header("Audio Sources")]
+    [Tooltip("Source for one-shot sounds (notes, fails)")]
+    [SerializeField] private AudioSource oneShotAudioSource; // Your original source
+    [Tooltip("Source for the looping sliding sound")]
+    [SerializeField] private AudioSource slidingAudioSource; // The NEW source
 
     [Header("Clips")]
     [Tooltip("Sounds of the finger sliding over strings")]
     [SerializeField] private AudioClip[] slidingOverBarsSound;
-    
+
 
     [Tooltip("Sound for hitting the metal bar")]
     [SerializeField] private AudioClip failBarSound;
-    
+
     [Tooltip("Sound for missing completely")]
     [SerializeField] private AudioClip failMissSound;
 
@@ -34,10 +37,32 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        // Find the AudioSource if we forgot to link it
-        if (audioSource == null)
+        // Find the OneShot source if we forgot to link it
+        if (oneShotAudioSource == null)
         {
-            audioSource = GetComponent<AudioSource>();
+            // Try to get the first AudioSource if not assigned
+            AudioSource[] sources = GetComponents<AudioSource>();
+            if (sources.Length > 0) oneShotAudioSource = sources[0];
+            Debug.LogWarning("OneShot AudioSource not assigned in Inspector, trying to find one.");
+        }
+        // Find the Sliding source if we forgot to link it
+        if (slidingAudioSource == null)
+        {
+            AudioSource[] sources = GetComponents<AudioSource>();
+            // If there are multiple, assume the second one is for sliding
+            if (sources.Length > 1) slidingAudioSource = sources[1];
+            else slidingAudioSource = oneShotAudioSource; // Fallback, might not be ideal
+            Debug.LogWarning("Sliding AudioSource not assigned in Inspector, trying to find one.");
+        }
+
+        if (slidingAudioSource != null)
+        {
+            slidingAudioSource.loop = true; // Make it loop
+            slidingAudioSource.playOnAwake = false; // Don't play automatically
+        }
+        else
+        {
+            Debug.LogError("Sliding AudioSource is missing in AudioManager!");
         }
     }
 
@@ -48,7 +73,7 @@ public class AudioManager : MonoBehaviour
         // Basic safety check for the array index
         if (correctStringSounds != null && stringIndex >= 0 && stringIndex < correctStringSounds.Length && correctStringSounds[stringIndex] != null)
         {
-            audioSource.PlayOneShot(correctStringSounds[stringIndex]);
+            oneShotAudioSource.PlayOneShot(correctStringSounds[stringIndex]);
         }
         else
         {
@@ -60,7 +85,7 @@ public class AudioManager : MonoBehaviour
     {
         if (failBarSound != null)
         {
-            audioSource.PlayOneShot(failBarSound);
+            oneShotAudioSource.PlayOneShot(failBarSound);
         }
     }
 
@@ -68,16 +93,41 @@ public class AudioManager : MonoBehaviour
     {
         if (failMissSound != null)
         {
-            audioSource.PlayOneShot(failMissSound);
+            oneShotAudioSource.PlayOneShot(failMissSound);
         }
     }
 
-    public void PlaySlidingSound()
+    /*public void PlaySlidingSound()
     {
         int selection = Random.Range(0, slidingOverBarsSound.Length - 1);
-        if (slidingOverBarsSound!=null)
+        if (slidingOverBarsSound != null)
         {
-            audioSource.PlayOneShot(slidingOverBarsSound[selection]);
+            oneShotAudioSource.PlayOneShot(slidingOverBarsSound[selection]);
+        }
+    }*/
+
+    public void StartSlidingSound()
+    {
+        // Only start if it's not already playing and we have sounds
+        if (slidingAudioSource != null && !slidingAudioSource.isPlaying && slidingOverBarsSound != null && slidingOverBarsSound.Length > 0)
+        {
+            // 1. Pick a random clip from the array
+            int selection = Random.Range(0, slidingOverBarsSound.Length);
+            AudioClip clipToPlay = slidingOverBarsSound[selection];
+
+            // 2. Assign it to the sliding source
+            slidingAudioSource.clip = clipToPlay;
+
+            // 3. Play the source (it's already set to loop)
+            slidingAudioSource.Play();
+        }
+    }
+
+    public void StopSlidingSound()
+    {
+        if (slidingAudioSource != null && slidingAudioSource.isPlaying)
+        {
+            slidingAudioSource.Stop();
         }
     }
 }

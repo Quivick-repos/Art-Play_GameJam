@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Collections; // <-- ADD THIS LINE
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     [Header("Debuff Links")]
     [SerializeField] private GameObject debuffMenuPanel;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private Camera mainCamera;
 
     [Header("Debuff Settings")]
     [SerializeField] private float speedDebuffMultiplier = 0.5f;
@@ -281,15 +283,12 @@ public class GameManager : MonoBehaviour
             Debug.Log("GAME OVER! Thanks for playing!");
             ShowGameOver();
         }
-        // "Restart" button that calls StartGame()
-        // gameOverScreen.SetActive(true); check if game is over, change some of these names
     }
 
     void ShowGameOver()
     {
         debuffMenuPanel.SetActive(false); // Just in case
         gameOverPanel.SetActive(true);
-        // This panel could have a "Restart Application" button
     }
 
     GuitarNote PickRandomNote()
@@ -327,34 +326,48 @@ public class GameManager : MonoBehaviour
         return newNote;
     }
 
-    // --- MODIFIED ApplyDebuffs() ---
     private void ApplyDebuffs()
     {
         // --- COMMENTED OUT until you have the scripts ---
-        /*
-        // --- Reset all debuffs from last game ---
-        inputManager.SetSpeedMultiplier(1, 1f);
-        inputManager.SetSpeedMultiplier(2, 1f);
-        inputManager.SetSlippery(1, false);
-        inputManager.SetSlippery(2, false);
-        mainCamera.transform.rotation = Quaternion.identity; 
 
-        // --- Apply the ONE debuff to BOTH teams ---
+        // --- Reset all debuffs from last game ---
+        if (team1Player != null)
+        {
+            team1Player.GetComponent<Player1Controller>().frogHand.resetMoveSpeed();
+        }
+        if (team2Player != null)
+        {
+            team2Player.GetComponent<Player2Controller>().frogHand.resetMoveSpeed();
+        }
+        //inputManager.SetSlippery(1, false);
+        //inputManager.SetSlippery(2, false);
+        mainCamera.transform.rotation = Quaternion.identity;
+
+        // --- Apply the selected debuff ---
         switch (_nextDebuff)
         {
             case DebuffType.SpeedReduction:
-                inputManager.SetSpeedMultiplier(1, speedDebuffMultiplier);
-                inputManager.SetSpeedMultiplier(2, speedDebuffMultiplier);
+                team1Player.GetComponent<Player1Controller>().frogHand.setMoveSpeed(speedDebuffMultiplier);
+                team2Player.GetComponent<Player2Controller>().frogHand.setMoveSpeed(speedDebuffMultiplier);
                 break;
-            case DebuffType.Slippery:
+            /*case DebuffType.Slippery:
                 inputManager.SetSlippery(1, true);
                 inputManager.SetSlippery(2, true);
-                break;
+                break;*/
             case DebuffType.FlipScreen:
                 mainCamera.transform.rotation = Quaternion.Euler(0, 0, 180);
                 break;
         }
-        */
+    }
+
+    /// <summary>
+    /// This is called by the "Quit" or "Main Menu" button on the game over screen.
+    /// It loads the Main Menu scene.
+    /// </summary>
+    public void GoToMainMenu()
+    {
+        // Make sure "MainMenuScene" exactly matches your scene file name
+        SceneManager.LoadScene("MainMenuScene");
     }
 
     // --- NEW PUBLIC UI FUNCTIONS ---
