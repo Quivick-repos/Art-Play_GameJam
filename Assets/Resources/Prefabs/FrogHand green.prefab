@@ -135,7 +135,7 @@ Transform:
   m_GameObject: {fileID: 1177221515688956191}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.91705775, y: 0.000000044703484, z: 0}
+  m_LocalPosition: {x: 0.91705793, y: 0.0000001937151, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -232,7 +232,7 @@ Transform:
   m_GameObject: {fileID: 2187127117739446979}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1894832, y: 0.00000006722985, z: 0}
+  m_LocalPosition: {x: 1.1894841, y: -0.000000022148015, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -288,7 +288,7 @@ MonoBehaviour:
   mid: {fileID: 4825758779512004605}
   end: {fileID: 2174374831612652716}
   target: {fileID: 438948514742361217}
-  maxStretch: 1.5
+  maxStretch: 10
   vertical: 0
 --- !u!1 &3871820036657108686
 GameObject:
@@ -318,7 +318,7 @@ Transform:
   m_GameObject: {fileID: 3871820036657108686}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.020489875, w: 0.9997901}
-  m_LocalPosition: {x: 1.1001761, y: 0.0000007301569, z: 0}
+  m_LocalPosition: {x: 1.1001759, y: 0.0000005811453, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -673,7 +673,7 @@ MonoBehaviour:
   mid: {fileID: 3015255185374714389}
   end: {fileID: 6100129028500689210}
   target: {fileID: 5675888884621516764}
-  maxStretch: 1.5
+  maxStretch: 10
   vertical: 0
 --- !u!1 &6529642424676208485
 GameObject:
@@ -878,7 +878,7 @@ Transform:
   m_GameObject: {fileID: 6606153807540644255}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.007939389, w: 0.99996847}
-  m_LocalPosition: {x: 1.1683767, y: 0.00000012171222, z: 0}
+  m_LocalPosition: {x: 1.1683757, y: 0.00000021109008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1167,7 +1167,7 @@ MonoBehaviour:
   mid: {fileID: 3272836174487254498}
   end: {fileID: 6956128811805948122}
   target: {fileID: 5335215811740380058}
-  maxStretch: 1.5
+  maxStretch: 10
   vertical: 0
 --- !u!1 &9072079368735707695
 GameObject:

@@ -16,14 +16,20 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] slidingOverBarsSound;
 
 
-    [Tooltip("Sound for hitting the metal bar")]
-    [SerializeField] private AudioClip failBarSound;
+    [Tooltip("Sounds for hitting the metal bar (picks one randomly)")]
+    [SerializeField] private AudioClip[] failBarSounds;
 
     [Tooltip("Sound for missing completely")]
     [SerializeField] private AudioClip failMissSound;
 
-    [Tooltip("Array of sounds, one for each string (index 0 = string 0)")]
-    [SerializeField] private AudioClip[] correctStringSounds; // Make sure size matches your string count
+    [Tooltip("Array of 3 sounds for correct notes (A for 0/1, B for 2/3, C for 4/5)")]
+    [SerializeField] private AudioClip[] correctNoteSounds;
+
+    [Header("End Game Chord Clips")]
+    [Tooltip("Sounds for a perfect game (3/3 correct)")]
+    [SerializeField] private AudioClip[] correctChordSounds;
+    [Tooltip("Sounds for an imperfect game (<3 correct)")]
+    [SerializeField] private AudioClip[] incorrectChordSounds;
 
     void Awake()
     {
@@ -68,24 +74,68 @@ public class AudioManager : MonoBehaviour
 
     // --- Public functions for the GameManager to call ---
 
-    public void PlayCorrectNote(int stringIndex)
+    public void PlayCorrectNote(int actualStringIndex)
     {
-        // Basic safety check for the array index
-        if (correctStringSounds != null && stringIndex >= 0 && stringIndex < correctStringSounds.Length && correctStringSounds[stringIndex] != null)
+        // Check if the array exists and has at least 3 sounds
+        if (correctNoteSounds != null && correctNoteSounds.Length >= 3)
         {
-            oneShotAudioSource.PlayOneShot(correctStringSounds[stringIndex]);
+            int soundIndex = 0; // Default to the first sound
+
+            // --- Determine which sound to play based on string index ---
+            if (actualStringIndex >= 0 && actualStringIndex <= 1)
+            {
+                soundIndex = 0; // Sound A for strings 0, 1
+            }
+            else if (actualStringIndex >= 2 && actualStringIndex <= 3)
+            {
+                soundIndex = 1; // Sound B for strings 2, 3
+            }
+            else if (actualStringIndex >= 4 && actualStringIndex <= 5)
+            {
+                soundIndex = 2; // Sound C for strings 4, 5
+            }
+            else
+            {
+                // Handle unexpected string index (optional)
+                Debug.LogWarning($"PlayCorrectNote called with invalid string index: {actualStringIndex}");
+                return;
+            }
+            // -----------------------------------------------------------
+
+            // Play the chosen clip if it's not null
+            AudioClip clipToPlay = correctNoteSounds[soundIndex];
+            if (clipToPlay != null)
+            {
+                oneShotAudioSource.PlayOneShot(clipToPlay);
+            }
+            else
+            {
+                Debug.LogWarning($"Correct note sound at index {soundIndex} (for string {actualStringIndex}) is missing!");
+            }
         }
         else
         {
-            Debug.LogWarning($"Tried to play correct note sound for string index {stringIndex}, but clip is missing or index is out of range!");
+            Debug.LogWarning("Correct note sounds array is missing or doesn't have 3 sounds!");
         }
     }
 
     public void PlayFailBarSound()
     {
-        if (failBarSound != null)
+        if (failBarSounds != null && failBarSounds.Length > 0)
         {
-            oneShotAudioSource.PlayOneShot(failBarSound);
+            // Pick a random index
+            int randomIndex = Random.Range(0, failBarSounds.Length);
+            AudioClip clipToPlay = failBarSounds[randomIndex];
+
+            // Play the chosen clip if it's not null
+            if (clipToPlay != null)
+            {
+                oneShotAudioSource.PlayOneShot(clipToPlay);
+            }
+            else
+            {
+                Debug.LogWarning($"Fail bar sound at index {randomIndex} is missing!");
+            }
         }
     }
 
@@ -128,6 +178,30 @@ public class AudioManager : MonoBehaviour
         if (slidingAudioSource != null && slidingAudioSource.isPlaying)
         {
             slidingAudioSource.Stop();
+        }
+    }
+
+    public void PlayEndGameChord(bool perfectScore)
+    {
+        AudioClip[] soundArray = perfectScore ? correctChordSounds : incorrectChordSounds;
+        string soundType = perfectScore ? "correct" : "incorrect";
+
+        if (soundArray != null && soundArray.Length > 0)
+        {
+            int randomIndex = Random.Range(0, soundArray.Length);
+            AudioClip clipToPlay = soundArray[randomIndex];
+            if (clipToPlay != null)
+            {
+                oneShotAudioSource.PlayOneShot(clipToPlay);
+            }
+            else
+            {
+                Debug.LogWarning($"End game {soundType} chord sound at index {randomIndex} is missing!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"End game {soundType} chord sounds array is empty or missing!");
         }
     }
 }
