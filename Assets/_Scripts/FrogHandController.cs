@@ -27,7 +27,7 @@ public class FrogHandController
     private float moveSpeed = 5f;
     private bool isSlippery = false;
     private Vector3 currentVelocity = Vector3.zero; // Tracks the finger's current speed and direction
-    public float slipperyAcceleration = 1.5f; //Lower is more slippery
+    public float slipperyAcceleration = 5f; //Lower is more slippery
 
     public FrogHandController(Transform thisTrans)
     {

@@ -209,7 +209,8 @@ public class Player1Controller : BaseController
         {
             Vector3 currentVelocity = frogHand.GetCurrentVelocity();
             // SLIPPERY: Smoothly adjust current velocity towards the target velocity
-            frogHand.SetCurrentVelocity(Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * frogHand.slipperyAcceleration));
+            float maxSpeedChange = frogHand.slipperyAcceleration * Time.deltaTime; // Calculate max change this frame
+            frogHand.SetCurrentVelocity(Vector3.MoveTowards(currentVelocity, targetVelocity, maxSpeedChange));
 
             // Check if applying this velocity KEEPS us within bounds
             Vector3 slipperyFuturePosition = currentFingerTarget.position + (currentVelocity * Time.deltaTime);
